@@ -37,6 +37,8 @@ program
 .option('-I, --ignoreImages <boolean>',                 'Not to export images', 'false')
 .option('-e, --outlineEmphasis <coefficient>',          'Emphasis of outlines when rendering Flash vectorial drawings', '1')
 .option('-L, --exclusiveList <animation names>',				'To only include animations present in the list', list)
+.option('-l, --strictExclusiveMode <boolean>',					'Animations in exclusiveList will match any animation with strictly the same name, except than partially', 'true')
+.option('-E, --ignoreExpression <expression>',					'REGEX to ignore certain animations', '')
 
 .parse(process.argv);
 
@@ -69,7 +71,9 @@ var exportParams = {
 	ignoreData:         JSON.parse(program.ignoreData),
 	ignoreImages:       JSON.parse(program.ignoreImages),
 	outlineEmphasis:    JSON.parse(program.outlineEmphasis),
-	exclusiveList:			program.exclusiveList
+	exclusiveList:			program.exclusiveList,
+	strictExclusiveMode:JSON.parse(program.strictExclusiveMode),
+	ignoreExpression:		program.ignoreExpression
 };
 
 function list(val) {
